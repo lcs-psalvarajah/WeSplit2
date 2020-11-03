@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-
-// When creating struct methods that want to change properties, we need to add the mutating keyword: @State
-    @State var tapCount = 0
+    @State private var name = ""
 
     var body: some View {
-        Button("Tap Count: \(tapCount)") {
-            self.tapCount += 1
+        Form {
+            TextField("Enter your name", text: $name)
+            Text("Your name is \(name)")
         }
     }
 }
