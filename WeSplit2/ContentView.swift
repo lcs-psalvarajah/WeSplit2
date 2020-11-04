@@ -8,7 +8,7 @@
 
 
 import SwiftUI
-
+ 
 struct ContentView: View {
     
     @State private var checkAmount = ""
@@ -68,7 +68,7 @@ struct ContentView: View {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
                 }
             }
-            .navigationBarTitle("WeSplit" )
+            .navigationBarTitle("WeSplit", displayMode: .inline)
         }
     }
 }
