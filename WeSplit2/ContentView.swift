@@ -12,13 +12,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var checkAmount = ""
-    @State private var numberOfPeople = 2
+    @State private var numberOfPeople = ""
     @State private var tipPercentage = 2
     
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var totalPerPerson: Double {
-        let peopleCount = Double(numberOfPeople + 2)
+        let peopleCount = Double(numberOfPeople) ?? 0
         let tipSelection = Double(tipPercentages[tipPercentage])
         let orderAmount = Double(checkAmount) ?? 0
         
@@ -33,7 +33,7 @@ struct ContentView: View {
         let orderAmount = Double(checkAmount) ?? 0
         let tipSelection = Double(tipPercentages[tipPercentage])
         let tipValue = orderAmount / 100 * tipSelection
-
+        
         let grandTotal = orderAmount + tipValue
         return grandTotal
     }
@@ -41,15 +41,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
+                
                 Section {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
-                    
-                    Picker("Number of people", selection: $numberOfPeople) {
-                        ForEach(2 ..< 100) {
-                            Text("\($0) people")
-                        }
-                    }
+                    TextField("Number of people", text: $numberOfPeople)
                 }
                 Section (header: Text("How much tip do you want to leave?"))
                 {
@@ -61,19 +57,19 @@ struct ContentView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                
                 Section (header: Text("Check + tip")){
                     Text("$ \(checkAndTip, specifier: "%.2f")")
                 }
-                
-                
                 Section (header: Text("Amount per person")){
                     Text("$\(totalPerPerson, specifier: "%.2f")")
                 }
-            } .navigationBarTitle("WeSplit" )
+            }
+            .navigationBarTitle("WeSplit" )
         }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
