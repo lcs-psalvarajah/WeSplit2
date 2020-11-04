@@ -18,7 +18,7 @@ struct ContentView: View {
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var totalPerPerson: Double {
-        let peopleCount = Double(numberOfPeople) ?? 0
+        let peopleCount = Double(numberOfPeople) ?? 1
         let tipSelection = Double(tipPercentages[tipPercentage])
         let orderAmount = Double(checkAmount) ?? 0
         
@@ -46,6 +46,7 @@ struct ContentView: View {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
                     TextField("Number of people", text: $numberOfPeople)
+                        .keyboardType(.decimalPad)
                 }
                 Section (header: Text("How much tip do you want to leave?"))
                 {
